@@ -6,30 +6,51 @@ const {Content} = await criteria.render();
 
 ---
 
-<div class="accordion-item bg-white border border-gray-200">
-  <h2 class="accordion-header mb-0" id={'accordion-heading-' + i}>
-    <button class="
-      accordion-button
-      relative
-      flex
-      items-center
-      w-full
-      py-4
-      px-5
-      text-base text-gray-800 text-left
-      bg-white
-      border-0
-      rounded-none
-      transition
-      focus:outline-none
-    " type="button" data-bs-toggle="collapse" data-bs-target={'#accordion-collapse-' + i} aria-expanded="true"
-      aria-controls={'accordion-collapse-' + i}>
-      {criteria.data.title}
-    </button>
-  </h2>
-  <div id={'accordion-collapse-' + i} class="accordion-collapse collapse show" aria-labelledby={'accordion-heading-' + i}>
-    <div class="accordion-body py-4 px-5">
-      <Content />
-    </div>
-  </div>
+<button class="accordion">{criteria.data.title}</button>
+<div class="panel">
+  <Content />
 </div>
+
+<script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+  
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      } 
+    });
+  }
+  </script>
+
+<style>
+  .accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+  }
+  
+  .active, .accordion:hover {
+    background-color: #ccc;
+  }
+  
+  .panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+  </style>
