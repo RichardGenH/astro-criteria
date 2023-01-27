@@ -2,21 +2,62 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Criteria from '../components/Criteria.astro';
-
+import 'tw-elements';
 
 import { getCollection, getEntryBySlug } from 'astro:content';
 // Get all entries from a collection. Requires the name of the collection as an argument.
 const allCriteria = await getCollection('criteria');
 
+//const {Content} = await allCriteria[0].render();
+
 const allPosts = await Astro.glob('../pages/posts/*.md');
 ---
+<script is:inline src="./node_modules/tw-elements/dist/js/index.min.js"></script>
 
 <Layout title="test">
 	<main>
 		<h1>Hello <span class="text-gradient">World</span>!</h1>
+    
+    <div class="accordion" id="accordionExample5" >
+      
+      <div class="accordion-item bg-white border border-gray-200">
+        <h2 class="accordion-header mb-0" id="headingTwo5">
+          <button class="
+            accordion-button
+            collapsed
+            relative
+            flex
+            items-center
+            w-full
+            py-4
+            px-5
+            text-base text-gray-800 text-left
+            bg-white
+            border-0
+            rounded-none
+            transition
+            focus:outline-none
+          " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo5" aria-expanded="false"
+            aria-controls="collapseTwo5">
+            Accordion Item #2
+          </button>
+        </h2>
+        <div id="collapseTwo5" class="accordion-collapse collapse" aria-labelledby="headingTwo5">
+          <div class="accordion-body py-4 px-5">
+            <strong>This is the second item's accordion body.</strong> It is hidden by default,
+            until the collapse plugin adds the appropriate classes that we use to style each
+            element. These classes control the overall appearance, as well as the showing and
+            hiding via CSS transitions. You can modify any of this with custom CSS or overriding
+            our default variables. It's also worth noting that just about any HTML can go within
+            the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      
+      {allCriteria.map((c, i) => {return (<Criteria criteria={c} i={i} />)})}
 
-		{allCriteria.map((c) => <Criteria entry={c} /> )}
-
+    </div>
+    
 	</main>
 </Layout>
 
