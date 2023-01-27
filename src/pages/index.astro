@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Criteria from '../components/Criteria.astro';
+import 'tw-elements'
 
 import { getCollection, getEntryBySlug } from 'astro:content';
 // Get all entries from a collection. Requires the name of the collection as an argument.
@@ -11,7 +12,7 @@ const allCriteria = await getCollection('criteria');
 
 const allPosts = await Astro.glob('../pages/posts/*.md');
 ---
-<script is:inline src="./node_modules/tw-elements/dist/js/index.min.js"></script>
+<script src="../../node_modules/tw-elements/dist/js/index.min.js"></script>
 
 <Layout title="test">
 	<main>
